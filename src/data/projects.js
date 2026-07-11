@@ -1,5 +1,3 @@
-// backend.sku-sku.com/project/all 실제 응답 기준으로 채운 데이터입니다.
-// (백엔드는 구현하지 않고, 응답 값만 그대로 옮겨와 로컬 이미지에 매핑했습니다.)
 export const projects = [
   {
     id: 104,
