@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+body {
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+}
+
+.fontBold {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+}
+
+.fontEB {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 800;
+}
+
+.fontRegular {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+}
