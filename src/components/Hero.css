@@ -1,38 +1,66 @@
-.hero{
-    position: relative;
-    width: 100%;
-    height: 100vh; /*화면 높이만큼(첫 화면이 꽉 차게 도와줌)*/
-
-    background-image: url("../assets/images/hero.jpg");
-    background-size: cover;
-    background-position: center;
+.hero {
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
 }
 
-/* 오버레이 */
-.overlay{
-    position: absolute;
-
-    width: 100%;
-    height: 100%;
-
-    background: rgba(0,0,0,0.55);
+.hero__overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 170px 100px 160px 185px;
+  box-sizing: border-box;
 }
 
-/* 글씨 */
-.hero-content {
-    position: absolute;
-    top: 35%;
-    left: 10%;
-    color: white;
+.hero__text {
+  color: #fff;
 }
 
-/* 제목 */
-.hero h1 {
-    font-size: 45px;
-    line-height: 1.3;
+.hero__title {
+  font-family: 'Pretendard-SemiBold',sans-serif;
+  font-size: 45px;
+  font-weight: 600;
+  line-height: 4rem;
+  margin-bottom: 30px;
+  letter-spacing: -0.03em;
 }
 
-/* 파란글씨 */
-.hero span {
-    color: #3E7BFA;
+.hero__highlight {
+  color: #4d7fff;
+}
+
+.hero__desc {
+  font-family: 'Pretendard-Thin';
+  font-size: 16px;
+  line-height: 2;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+}
+
+.hero__desc strong {
+  font-family: 'Pretendard-SemiBold';
+  font-weight: 500;
+}
+.hero__scroll {
+  font-family: 'Pretendard-SemiBold';
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  margin-left: -40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-size: 14px;
+}
+
+.hero__scroll img {
+  width: 23px;
+  margin-top: 8px;
 }

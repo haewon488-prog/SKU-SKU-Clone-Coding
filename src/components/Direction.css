@@ -1,0 +1,132 @@
+.direction {
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.direction__dim {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.direction__overlay {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+  padding: 190px 100px 80px; /* 위쪽 padding으로 title 위치 고정 */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* center → flex-start */
+  gap: 0;
+}
+.direction__heading {
+  text-align: center;
+  color: #fff;
+}
+
+.direction__subtitle {
+  font-family: 'Pretendard-Thin';
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: -0.04em;
+  margin-bottom: 3px;
+}
+
+.direction__title {
+  font-family: 'Pretendard-SemiBold';
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.direction__cards {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-top: 100px; /* 카드만 아래로 내리는 여백 */
+  margin-bottom: 60px; /* quote와의 간격 */
+}
+
+.direction__card {
+  width: 350px;
+  height: 190px;
+  padding: 28px;
+  border-radius: 10px;
+  color: #fff;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.direction__card--1 {
+  background-color: #4B76D3;
+}
+
+.direction__card--2 {
+  background-color: #264C9F;
+}
+
+.direction__card--3 {
+  background-color: #142F69;
+}
+
+.direction__card h3 {
+  font-family: 'Pretendard-SemiBold';
+  font-size: 26px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.direction__card p {
+  font-family: 'Pretendard-Thin';
+  font-size: 15px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.direction__card img {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+}
+
+.direction__card img {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  height: auto;
+}
+
+.direction__card--1 img {
+  width: 60px;
+}
+
+.direction__card--2 img {
+  width: 90px;
+}
+
+.direction__card--3 img {
+  width: 60px;
+}
+
+.direction__quote {
+  text-align: center;
+  color: #fff;
+  font-family: 'Pretendard-Thin', sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.direction__quote-highlight {
+  font-family: 'Pretendard-Medium', sans-serif;
+  font-size: 20px;
+}
