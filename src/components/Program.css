@@ -1,0 +1,147 @@
+/* 전체 공통 박스 사이징 선언 */
+.program {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 1. 상단 인트로 배너 구역 */
+.program__intro {
+  background-color: #0E0E0E;
+  color: #ffffff;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.program__intro-text {
+  font-family: 'Pretendard-Thin', sans-serif;
+  font-weight: 300;
+  font-size: clamp(16px, 2.5vw, 24px);
+  display: flex;
+  letter-spacing: -0.05em;
+  align-items: center;
+  margin: 0;
+}
+
+.program__intro-bold {
+  font-family: 'Pretendard-SemiBold', sans-serif;
+  font-weight: 500;
+  margin-left: 6px;
+}
+
+/* 2. 메인 리스트 콘텐츠 구역 */
+.program__content {
+  background-color: #1B1B1B;
+  padding: 80px 56px 160px 56px; /* sm:py-20 sm:pb-40 반영 */
+  box-sizing: border-box;
+}
+
+/* 연도 표기 인포 태그 */
+.program__info-tag {
+  color: #9ABFFF;
+  font-family: 'Pretendard-SemiBold', sans-serif;
+  font-weight: 500;
+  text-align: center;
+  font-size: clamp(11px, 1.5vw, 18px);
+  margin-top: 0;
+  margin-bottom: 80px; /* space-y-20 간격 확보 */
+}
+
+/* 프로그램 리스트 묶음 */
+.program__list {
+  max-width: 1024px; /* max-w-5xl 가둠 */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 100px; /* 각 프로그램 카드 행 간의 고정 간격 (sm:gap-25) */
+}
+
+/* 개별 프로그램 기본 행 구조 */
+.program__item {
+  display: flex;
+  flex-direction: row; /* 좌우 나란히 배치 */
+  align-items: center;
+  gap: 80px; /* sm:gap-20 */
+  width: 100%;
+}
+
+/* 짝수 번째 아이템은 좌우 반전 고정 처리 (sm:flex-row-reverse 구현) */
+.program__item--reverse {
+  flex-direction: row-reverse;
+}
+
+/* 프로그램 메인 이미지 */
+.program__item-img {
+  width: 45%; /* sm:w-[45%] */
+  max-width: 450px;
+  height: auto;
+  border-radius: 15px; /* sm:rounded-[15px] */
+  object-fit: cover;
+}
+
+/* 우측/좌측 텍스트 정보 구역 */
+.program__item-info {
+  flex: 1;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* space-y-6 보정 */
+  padding: 0 16px; /* sm:px-4 */
+}
+
+/* 프로그램 제목 (함께 공부하는 스터디 등) */
+.program__item-title {
+  /* 💡 핵심: 'SemiBold'를 'Medium' 서체로 바꿔줍니다! */
+  font-family: 'Pretendard-Medium', sans-serif; 
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  font-size: clamp(18px, 3vw, 32px);
+  margin: 0;
+}
+
+.program__highlight {
+  color: #72A6FF;
+  /* 💡 파란색 글자에도 500 서체 명세를 똑같이 먹여서 굵기를 통일시킵니다 */
+  font-family: 'Pretendard-Medium', sans-serif;
+  font-weight: 500;
+}
+
+/* 설명 본문 문구 */
+.program__item-desc {
+  color: #E5E5E5;
+  font-family: 'Pretendard-Thin', sans-serif;
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  font-size: 15.5px;
+  line-height: 1.6;
+  white-space: pre-line; /* \n 줄바꿈 정상 표시를 위해 지정 */
+  margin: 0;
+}
+
+/* 장소, 시간 메타 데이터 영역 */
+.program__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* space-y-1 */
+  color: #E5E5E5;
+  font-family: 'Pretendard-Thin', sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+  letter-spacing: -0.05em;
+}
+
+.program__meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* gap-2 */
+}
+
+.program__meta-icon {
+  width: 12px; /* w-3 */
+  height: auto;
+}
+
+.program__meta-sub {
+  font-size: clamp(10px, 1.1vw, 12px);
+}

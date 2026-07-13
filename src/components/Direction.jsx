@@ -20,41 +20,38 @@ function Direction() {
 
         <div className="direction__cards">
           <div className="direction__card direction__card--1">
-            <h3>자기주도성</h3>
-            <p>
-              나만의 커리어를 직접 설계하고,
-              <br />
-              만들어갈 수 있습니다
-            </p>
-            <img src={iconSelf} alt="자기주도성" />
+            <div className="direction__card-text">
+              <p className="direction__card-title">자기주도성</p>
+              <div className="direction__card-desc">
+                나만의 커리어를 직접 설계하고,<br />만들어갈 수 있습니다
+              </div>
+            </div>
+            <img alt="자기주도성" src={iconSelf} className="direction__card-icon" />
           </div>
 
           <div className="direction__card direction__card--2">
-            <h3>협력성</h3>
-            <p>
-              동료들과 개발 고민을 함께
-              <br />
-              협력하고 공유하며,
-              <br />
-              성장할 수 있습니다.
-            </p>
-            <img src={iconTeam} alt="협력성" />
+            <div className="direction__card-text">
+              <p className="direction__card-title">협력성</p>
+              <div className="direction__card-desc">
+                동료들과 개발 고민을 함께<br />협력하고 공유하며,<br />성장할 수 있습니다.
+              </div>
+            </div>
+            <img alt="협력성" src={iconTeam} className="direction__card-icon" />
           </div>
 
           <div className="direction__card direction__card--3">
-            <h3>가능성</h3>
-            <p>
-              나만의 커리어를 직접 설계하고,
-              <br />
-              만들어갈 수 있습니다
-            </p>
-            <img src={iconPossibility} alt="가능성" />
+            <div className="direction__card-text">
+              <p className="direction__card-title">가능성</p>
+              <div className="direction__card-desc">
+                나만의 커리어를 직접 설계하고,<br />만들어갈 수 있습니다
+              </div>
+            </div>
+            <img alt="가능성" src={iconPossibility} className="direction__card-icon" />
           </div>
         </div>
 
         <p className="direction__quote">
-        <span className="direction__quote-highlight">
-          "내 아이디어를 내 손으로 실현한다."</span> 라는 모토를 가지고,
+          <span className="direction__quote-highlight">"내 아이디어를 내 손으로 실현한다."</span> 라는 모토를 가지고,
           <br />
           실제 서비스를 구현하며 개발자의 꿈을 이루는데
           <br />
