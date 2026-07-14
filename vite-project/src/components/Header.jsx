@@ -32,10 +32,10 @@ export default function Header() {
         </nav>
 
         <div className="lk-actions">
-          <a href="#" className="lk-icon-link" aria-label="Instagram">
+          <a href="#" className="lk-icon-circle" aria-label="Instagram">
             <InstagramIconLine />
           </a>
-          <a href="#" className="lk-icon-link" aria-label="Channel Talk">
+          <a href="#" className="lk-icon-circle" aria-label="Channel Talk">
             <ChannelIcon />
           </a>
           <button className="lk-btn lk-btn-blue">

@@ -97,4 +97,30 @@ export const TalkIcon = () => (
   </svg>
 );
 
-/* 헤더 전용: currentColor를 써서 배경(다크/화이트)에 따라 색이 자동으로 바뀜 */
+export const InstagramIconLine = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <rect
+      x="3"
+      y="3"
+      width="18"
+      height="18"
+      rx="5"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    />
+    <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" />
+    <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+  </svg>
+);
+
+export const ChannelIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path
+      d="M12 3C7 3 3 6.3 3 10.5c0 2.7 1.8 5.1 4.6 6.4L7 21l4-2.4c.3 0 .7.1 1 .1 5 0 9-3.3 9-7.5S17 3 12 3z"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
