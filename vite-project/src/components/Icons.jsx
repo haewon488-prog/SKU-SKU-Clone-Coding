@@ -96,3 +96,5 @@ export const TalkIcon = () => (
     />
   </svg>
 );
+
+/* 헤더 전용: currentColor를 써서 배경(다크/화이트)에 따라 색이 자동으로 바뀜 */

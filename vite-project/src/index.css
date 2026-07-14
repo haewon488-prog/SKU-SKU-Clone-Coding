@@ -91,11 +91,22 @@ body {
 
 /* header */
 .lk-header {
-  border-bottom: 1px solid var(--border);
+  position: relative;
   background: var(--bg);
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 50;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+.lk-header:hover {
+  background: #ffffff;
+  color: #111111;
+  border-bottom-color: #eeeeee;
 }
 .lk-header-inner {
   max-width: 1280px;
@@ -105,6 +116,8 @@ body {
   justify-content: space-between;
   padding: 18px 32px;
   gap: 24px;
+  position: relative;
+  z-index: 2;
 }
 .lk-logo {
   display: flex;
@@ -132,13 +145,28 @@ body {
   font-size: 15px;
   color: var(--text-dim);
   letter-spacing: 0.02em;
+  transition: color 0.2s ease;
 }
 .lk-nav-link.active {
   color: var(--text);
 }
+.lk-header:hover .lk-nav-link {
+  color: #555555;
+}
+.lk-header:hover .lk-nav-link.active {
+  color: #000000;
+}
+
 .lk-actions {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 14px;
+}
+.lk-icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
 }
 .lk-btn {
   display: flex;
@@ -158,6 +186,54 @@ body {
 .lk-btn-white {
   background: #fff;
   color: #1a1a1a;
+  border: 1px solid #e5e5e5;
+}
+
+/* 드롭다운 메뉴 */
+.lk-header-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  color: #111111;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.3s ease,
+    opacity 0.25s ease;
+  z-index: 1;
+}
+.lk-header:hover .lk-header-dropdown {
+  max-height: 320px;
+  opacity: 1;
+}
+.lk-dropdown-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  gap: 96px;
+  padding: 32px;
+}
+.lk-dropdown-col h4 {
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 800;
+  margin: 0 0 18px;
+}
+.lk-dropdown-col a {
+  display: block;
+  color: #444444;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+.lk-dropdown-col a.current {
+  color: #000000;
+  font-weight: 800;
+}
+.lk-dropdown-col a:hover {
+  color: var(--blue);
 }
 
 /* hero */
@@ -388,5 +464,8 @@ body {
   }
   .lk-footer-meta {
     text-align: left;
+  }
+  .lk-header-dropdown {
+    display: none;
   }
 }
