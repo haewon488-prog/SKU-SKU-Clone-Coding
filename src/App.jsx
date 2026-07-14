@@ -1,7 +1,15 @@
-import Project from './pages/Project'
+import Hero from "./components/Hero";
+import Direction from "./components/Direction";
+import Program from "./components/Program";
 
 function App() {
-  return <Project />
+  return (
+    <>
+      <Hero />
+      <Direction />
+      <Program />
+    </>
+  );
 }
 
-export default App
+export default App;

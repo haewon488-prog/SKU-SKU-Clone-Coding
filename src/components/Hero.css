@@ -1,66 +1,66 @@
-.hero {
-  width: 100%;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
+/* ==========================================
+   기존 레이아웃(왼쪽 정렬)에 간섭하지 않는 순수 애니메이션 클래스
+   ========================================== */
+
+/* 1. 처음 대기 상태: 뷰포트 깊숙한 아래쪽(120px) 배치 + 반투명(opacity 0) + 흐림 필터 추가 */
+.hero__hidden {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(120px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hero__overlay {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 170px 100px 160px 185px;
-  box-sizing: border-box;
+/* 2. 스크롤이 감지되었을 때 반투명 -> 선명해지며 위로 슝 올라오는 효과 */
+.hero__fade-in-up {
+  animation: pureFadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.hero__text {
-  color: #fff;
+/* 3. 하단 스크롤 영역 서서히 나타남 */
+.hero__fade-in {
+  animation: pureFadeIn 1.5s ease-out 0.8s both;
 }
 
-.hero__title {
-  font-family: 'Pretendard-SemiBold',sans-serif;
-  font-size: 45px;
-  font-weight: 600;
-  line-height: 4rem;
-  margin-bottom: 30px;
-  letter-spacing: -0.03em;
+/* 4. 마우스 아이콘 제자리 바운싱 */
+.hero__scroll-bounce {
+  animation: pureMouseBounce 1.8s infinite ease-in-out;
 }
 
-.hero__highlight {
-  color: #4d7fff;
+
+/* ==========================================
+   애니메이션 키프레임 정의 (Keyframes)
+   ========================================== */
+
+@keyframes pureFadeInUp {
+  from {
+    opacity: 0;
+    filter: blur(10px);          /* 처음엔 흐릿하게 시작 */
+    transform: translateY(120px); /* 더 깊은 밑에서 출발 */
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);              /* 제자리에 오면서 완전히 선명해짐 */
+    transform: translateY(0);
+  }
 }
 
-.hero__desc {
-  font-family: 'Pretendard-Thin';
-  font-size: 16px;
-  line-height: 2;
-  font-weight: 300;
-  letter-spacing: -0.03em;
+@keyframes pureFadeIn {
+  from {
+    opacity: 0;
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
 }
 
-.hero__desc strong {
-  font-family: 'Pretendard-SemiBold';
-  font-weight: 500;
-}
-.hero__scroll {
-  font-family: 'Pretendard-SemiBold';
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  margin-left: -40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #fff;
-  font-size: 14px;
-}
-
-.hero__scroll img {
-  width: 23px;
-  margin-top: 8px;
+@keyframes pureMouseBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
 }

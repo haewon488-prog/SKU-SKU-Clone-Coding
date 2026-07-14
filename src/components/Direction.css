@@ -1,160 +1,35 @@
-/* 1. 전체 섹션 바탕 설정 */
-.direction {
-  /* 기본 서체는 프리텐다드 기본형으로 세팅 */
-  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  width: 100%;
-  min-height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
+/* ==========================================================================
+   기존 레이아웃(반응형 유틸리티)에 간섭하지 않는 순수 스크롤 모션 클래스
+   ========================================================================== */
+
+/* 1. 처음 대기 상태: 뷰포트 깊숙한 아래쪽(120px) 배치 + 반투명(opacity 0) + 흐림 필터 추가 */
+.direction__hidden {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(120px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 배경 어둡게 깔아주는 딤 */
-.direction__dim {
-  position: absolute;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+/* 2. 스크롤이 감지되었을 때 반투명 -> 선명해지며 위로 슝 올라오는 효과 */
+.direction__fade-in-up {
+  animation: pureDirectionFadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* 2. 메인 컨테이너 */
-.direction__overlay {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  min-height: 100vh;
-  padding-top: 195px;    
-  padding-bottom: 64px;  
-  padding-left: 80px;    
-  padding-right: 80px;
-  box-sizing: border-box;
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 123px; 
-  color: #fff;
-}
+/* ==========================================
+   애니메이션 키프레임 정의 (Keyframes)
+   ========================================== */
 
-/* 3. 상단 타이틀 구역 */
-.direction__heading {
-  text-align: center;
-  color: #fff;
-}
-
-.direction__subtitle {
-  font-family: 'Pretendard-Thin', sans-serif; /* fontThin 반영 */
-  font-size: 15.5px; 
-  font-weight: 300;
-  letter-spacing: -0.03em;
-}
-
-.direction__title {
-  font-family: 'Pretendard-Thin'; /* fontSB 반영 */
-  font-size: clamp(20px, 2.9vw, 30px); 
-  font-weight: 550;
-  margin: 0;
-}
-
-/* 4. 카드 목록 정렬 */
-.direction__cards {
-  width: 92%;
-  display: flex;
-  flex-wrap: wrap;       
-  justify-content: center;
-  gap: 24px 88px;        
-  margin-top: 8px;       
-}
-
-/* 개별 카드 기본틀 */
-.direction__card {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly; 
-  
-  flex: 1;
-  min-width: 0;
-  max-width: 25%;         
-  height: 192px;          
-  
-  border-radius: 12px;    
-  padding: 8px 12px;      
-  box-sizing: border-box;
-  color: #fff;
-}
-
-/* 박스 색상 보존 */
-.direction__card--1 {
-  background-color: rgb(75, 118, 211);
-}
-
-.direction__card--2 {
-  background-color: rgb(38, 76, 159);
-}
-
-.direction__card--3 {
-  background-color: rgb(20, 47, 105);
-}
-
-/* 카드 내부 텍스트 영역 */
-.direction__card-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 8px;               
-  text-align: left;
-  overflow: hidden;
-}
-
-/* 카드 제목 */
-.direction__card-title {
-  font-family: 'Pretendard-SemiBold', sans-serif; /* fontSB 반영 */
-  font-weight: 500;
-  letter-spacing: -0.06em;
-  font-size: clamp(11px, 2.9vw, 26px);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; 
-  margin: 0;
-}
-
-/* 카드 설명글 */
-.direction__card-desc {
-  font-family: 'Pretendard-ExtraLight', sans-serif; /* fontEL 반영 */
-  font-size: 15px;
-  line-height: 1.25rem;   
-  word-break: break-all;  
-  color: #fff;
-  font-weight: 300;
-  letter-spacing: -0.04em;
-}
-
-/* 5. 아이콘 크기 제어 */
-.direction__card-icon {
-  width: clamp(24px, 5vw, 60px);
-  height: auto;
-  flex-shrink: 0;         
-}
-
-.direction__card--2 .direction__card-icon {
-  width: clamp(40px, 7vw, 90px);
-}
-
-/* 6. 하단 인용구 문구 구역 */
-.direction__quote {
-  text-align: center;
-  color: #fff;
-  font-family: 'Pretendard-Thin', sans-serif; /* fontThin 반영 */
-  font-size: 15.5px;
-  line-height: 1.8rem; 
-  font-weight: 300;   
-  letter-spacing: -0.03em; 
-
-}
-
-.direction__quote-highlight {
-  font-family: 'Pretendard-Medium', sans-serif; /* fontMedium 반영 */
-  font-size: 20px;    
-  font-weight: 400;    
+@keyframes pureDirectionFadeInUp {
+  from {
+    opacity: 0;
+    filter: blur(10px);          /* 처음엔 흐릿하게 시작 */
+    transform: translateY(120px); /* 더 깊은 밑에서 출발 */
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);              /* 제자리에 오면서 완전히 선명해짐 */
+    transform: translateY(0);
+  }
 }
