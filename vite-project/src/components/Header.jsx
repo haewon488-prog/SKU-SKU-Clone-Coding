@@ -1,3 +1,4 @@
+import { Link, useLocation } from "react-router-dom";
 import {
   BuildingIcon,
   GoogleIcon,
@@ -7,28 +8,39 @@ import {
 import { GENERATIONS } from "../data/teamData.jsx";
 
 export default function Header() {
+  const { pathname } = useLocation();
+
   return (
     <header className="lk-header">
       <div className="lk-header-inner">
-        <div className="lk-logo">
+        <Link to="/" className="lk-logo">
           <img
             src="/logo/likelionLogo.png"
             alt="LIKELION SKU"
             className="logo-img"
           />
           <span>LIKELION SKU</span>
-        </div>
+        </Link>
 
         <nav className="lk-nav">
-          <a href="/project" className="lk-nav-link">
+          <Link
+            to="/project"
+            className={`lk-nav-link ${pathname.startsWith("/project") ? "active" : ""}`}
+          >
             PROJECT
-          </a>
-          <a href="/team" className="lk-nav-link active">
+          </Link>
+          <Link
+            to="/team"
+            className={`lk-nav-link ${pathname.startsWith("/team") ? "active" : ""}`}
+          >
             TEAM
-          </a>
-          <a href="/community" className="lk-nav-link">
+          </Link>
+          <Link
+            to="/community"
+            className={`lk-nav-link ${pathname.startsWith("/community") ? "active" : ""}`}
+          >
             COMMUNITY
-          </a>
+          </Link>
         </nav>
 
         <div className="lk-actions">
@@ -47,33 +59,51 @@ export default function Header() {
         </div>
       </div>
 
+      {/* 드롭다운: 위 header-inner와 완전히 같은 구조를 재사용해서
+          로고/버튼 자리는 투명하게 비워두고, nav 자리에만 기수 목록을 채운다.
+          → PROJECT / TEAM / COMMUNITY 메뉴 바로 아래에 자동으로 정렬됨 */}
       <div className="lk-header-dropdown">
-        <div className="lk-dropdown-inner">
-          <div className="lk-dropdown-col">
-            <h4>PROJECT</h4>
-            {GENERATIONS.map((g) => (
-              <a href={`/project?tab=${g}`} key={"dp" + g}>
-                {g}
-              </a>
-            ))}
+        <div className="lk-header-inner">
+          <div className="lk-logo" style={{ visibility: "hidden" }}>
+            <img src="/logo/likelionLogo.png" alt="" className="logo-img" />
+            <span>LIKELION SKU</span>
           </div>
 
-          <div className="lk-dropdown-col">
-            <h4>TEAM</h4>
-            {GENERATIONS.map((g) => (
-              <a
-                href={`/team?tab=${g}`}
-                key={"dt" + g}
-                className={g === "14기" ? "current" : ""}
-              >
-                {g}
-              </a>
-            ))}
-          </div>
+          <nav className="lk-nav">
+            <div className="lk-dropdown-col">
+              {GENERATIONS.map((g) => (
+                <Link to={`/project?tab=${g}`} key={"dp" + g}>
+                  {g}
+                </Link>
+              ))}
+            </div>
 
-          <div className="lk-dropdown-col">
-            <h4>COMMUNITY</h4>
-            <a href="/community/recruit">모집공고</a>
+            <div className="lk-dropdown-col">
+              {GENERATIONS.map((g) => (
+                <Link to={`/team?tab=${g}`} key={"dt" + g}>
+                  {g}
+                </Link>
+              ))}
+            </div>
+
+            <div className="lk-dropdown-col">
+              <Link to="/community/recruit">모집공고</Link>
+            </div>
+          </nav>
+
+          <div className="lk-actions" style={{ visibility: "hidden" }}>
+            <a href="#" className="lk-icon-circle" aria-hidden="true">
+              <InstagramIconLine />
+            </a>
+            <a href="#" className="lk-icon-circle" aria-hidden="true">
+              <ChannelIcon />
+            </a>
+            <button className="lk-btn lk-btn-blue">
+              <BuildingIcon /> CYBERCAMPUS
+            </button>
+            <button className="lk-btn lk-btn-white">
+              <GoogleIcon /> <span>구글계정으로 계속하기</span>
+            </button>
           </div>
         </div>
       </div>
