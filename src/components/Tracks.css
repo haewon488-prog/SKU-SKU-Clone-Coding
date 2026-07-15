@@ -1,0 +1,30 @@
+/* Tracks.css */
+.fontBold {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+}
+
+.fontMedium {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 500;
+}
+
+.fontThin {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 300;
+}
+
+.fontEL {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 200;
+}
+
+/* 기존 프로젝트에서 사용하던 스무스한 모션 속성 */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
