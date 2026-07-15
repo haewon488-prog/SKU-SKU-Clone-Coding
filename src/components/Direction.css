@@ -1,8 +1,4 @@
-/* ==========================================================================
-   기존 레이아웃(반응형 유틸리티)에 간섭하지 않는 순수 스크롤 모션 클래스
-   ========================================================================== */
-
-/* 1. 처음 대기 상태: 뷰포트 깊숙한 아래쪽(120px) 배치 + 반투명(opacity 0) + 흐림 필터 추가 */
+/* 처음 숨김 대기 상태 (스크롤 전) */
 .direction__hidden {
   opacity: 0;
   filter: blur(10px);
@@ -12,24 +8,21 @@
               transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 2. 스크롤이 감지되었을 때 반투명 -> 선명해지며 위로 슝 올라오는 효과 */
+/* 화면 진입 시 애니메이션 작동 */
 .direction__fade-in-up {
   animation: pureDirectionFadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* ==========================================
-   애니메이션 키프레임 정의 (Keyframes)
-   ========================================== */
-
+/* 아래에서 서서히 올라오며 선명해지는 모션 시나리오 */
 @keyframes pureDirectionFadeInUp {
   from {
     opacity: 0;
-    filter: blur(10px);          /* 처음엔 흐릿하게 시작 */
-    transform: translateY(120px); /* 더 깊은 밑에서 출발 */
+    filter: blur(10px);
+    transform: translateY(120px);
   }
   to {
     opacity: 1;
-    filter: blur(0);              /* 제자리에 오면서 완전히 선명해짐 */
+    filter: blur(0);
     transform: translateY(0);
   }
 }

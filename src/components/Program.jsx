@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Program.css';
 
-// 이미지 에셋 임포트 유지
+// 이미지 에셋 임포트
 import imgMain3_1 from '../assets/images/Main3_1.png';
 import imgMain3_2 from '../assets/images/Main3_2.png';
 import imgMain3_3 from '../assets/images/Main3_3.png';
@@ -10,19 +10,22 @@ import imgMain3_5 from '../assets/images/Main3_5.png';
 import iconPlace from '../assets/images/place.png';
 import iconDate from '../assets/images/date.png';
 
+// ==========================================
 // 1. 개별 프로그램 카드 컴포넌트 (스크롤 반응형 무한 모션)
+// ==========================================
 function ProgramCard({ program, index }) {
   const cardRef = useRef(null);
   const [isIntersecting, setIsIntersecting] = useState(false);
 
   useEffect(() => {
+    // 뷰포트 영역 내에 카드가 진입하는지 실시간 감지하는 Observer 인스턴스 생성
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsIntersecting(entry.isIntersecting);
+        setIsIntersecting(entry.isIntersecting); // 화면 진입 상태값 업데이트
       },
       {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
+        threshold: 0.1, // 카드 영역이 10% 이상 노출되었을 때 동작
+        rootMargin: "0px 0px -50px 0px" // 뷰포트 하단 50px 경계를 넘어서서 눈앞에 올 때 모션 트리거
       }
     );
 
@@ -32,16 +35,18 @@ function ProgramCard({ program, index }) {
 
     return () => {
       if (cardRef.current) {
-        observer.unobserve(cardRef.current);
+        observer.unobserve(cardRef.current); // 언마운트 시 옵저버 해제하여 메모리 누수 방지
       }
     };
   }, []);
 
+  // 홀수 인덱스(0, 2, 4...)는 좌->우 정렬, 짝수 인덱스(1, 3)는 우->좌로 지그재그 정렬
   const isReverse = index % 2 !== 0;
 
   return (
     <div
       ref={cardRef}
+      // 모바일: 세로 그리드, 태블릿 이상: 수평 Flex 및 지그재그 방향 전환(isReverse)
       className={`flex flex-col sm:flex-row items-center gap-4 sm:gap-20 transition-all duration-700 ${
         isReverse ? 'sm:flex-row-reverse' : ''
       } ${isIntersecting ? 'program__fade-in-up' : 'program__hidden'}`}
@@ -78,7 +83,9 @@ function ProgramCard({ program, index }) {
   );
 }
 
+// ==========================================
 // 2. 메인 Program 컴포넌트
+// ==========================================
 function Program() {
   const headerRef = useRef(null);
   const [isHeaderIntersecting, setIsHeaderIntersecting] = useState(false);
@@ -90,7 +97,7 @@ function Program() {
 
   const [displayedText, setDisplayedText] = useState("");
 
-  // 상단 인트로 배너 관찰자 설정 (화면에 진입할 때마다 트리거)
+  // 상단 인트로 배너가 화면 안에 들어와 있는지 관찰
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -110,28 +117,27 @@ function Program() {
     };
   }, []);
 
-  // 화면에 보이고 안 보임에 따라 타이핑 애니메이션 실행 및 리셋
+  // 화면 진입(isHeaderIntersecting: true) 시 타이핑 모션 실행 / 화면 이탈 시 리셋 회로
   useEffect(() => {
     if (!isHeaderIntersecting) {
-      // 화면 밖으로 완전히 나가면 텍스트 비우기
-      setDisplayedText("");
+      setDisplayedText(""); // 화면에서 벗어나면 텍스트를 즉시 비우고 타이머 등록 차단
       return;
     }
 
     let index = 0;
     const timer = setInterval(() => {
-      setDisplayedText(fullText.slice(0, index + 1));
+      setDisplayedText(fullText.slice(0, index + 1)); // 80ms 간격으로 글자수 슬라이싱 누적
       index++;
 
       if (index >= fullText.length) {
-        clearInterval(timer);
+        clearInterval(timer); // 타이핑 완료 시 타이머 즉시 소거
       }
     }, 80);
 
-    return () => clearInterval(timer);
+    return () => clearInterval(timer); // 훅 재실행 및 언마운트 시 인터벌 완전 청소
   }, [isHeaderIntersecting]);
 
-  // 5개의 프로그램 데이터 배열
+  // 프로그램 리스트 고정 데이터 테이블
   const programData = [
     {
       img: imgMain3_1,
@@ -187,7 +193,7 @@ function Program() {
 
   return (
     <div className="program">
-      {/* 1. 상단 인트로 배너 구역 - headerRef 추가 및 Intersection 기반 렌더링 클래스 적용 */}
+      {/* 1. 상단 인트로 배너 구역 */}
       <div 
         ref={headerRef}
         className="hidden sm:flex bg-[#0E0E0E] text-white h-[300px] justify-center items-center text-[16px] sm:text-[20px] lg:text-[24px]"
@@ -224,7 +230,7 @@ function Program() {
           @2026 PROGRAM info
         </p>
 
-        {/* 관찰 대상 컨테이너 - 스크롤할 때마다 개별 카드 모션 반복 작동 */}
+        {/* 모바일 2열 바둑판 그리드, 데스크톱 1열 수평 엇갈림 flex 레이아웃으로 동적 분기 */}
         <div className="max-w-5xl mx-auto sm:flex sm:flex-col max-sm:grid max-sm:grid-cols-2 sm:gap-25 gap-4">
           {programData.map((program, index) => (
             <ProgramCard 

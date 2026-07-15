@@ -2,28 +2,32 @@
    기존 레이아웃(왼쪽 정렬)에 간섭하지 않는 순수 애니메이션 클래스
    ========================================== */
 
-/* 1. 처음 대기 상태: 뷰포트 깊숙한 아래쪽(120px) 배치 + 반투명(opacity 0) + 흐림 필터 추가 */
+/* (1) 화면에 등장하기 전 대기 상태 (완전 투명 + 아래쪽에 배치 + 흐릿하게 처리) */
 .hero__hidden {
-  opacity: 0;
-  filter: blur(10px);
-  transform: translateY(120px);
+  opacity: 0; /* 완전히 투명하게 숨김 */
+  filter: blur(10px); /* 글씨를 흐릿하게 번지게 만듦 */
+  transform: translateY(120px); /* 원래 위치보다 120픽셀 아래로 밀어둠 */
+  /* 상태가 변할 때 1.2초 동안 부드럽게 변하도록 전환 속도 설정 */
   transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
               filter 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
               transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 2. 스크롤이 감지되었을 때 반투명 -> 선명해지며 위로 슝 올라오는 효과 */
+/* (2) 화면에 감지되었을 때 작동할 애니메이션 (아래에서 위로 올라오며 선명해짐) */
 .hero__fade-in-up {
+  /* pureFadeInUp 애니메이션을 1.2s 동안 실행하고 끝난 상태를 유지(forwards) */
   animation: pureFadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* 3. 하단 스크롤 영역 서서히 나타남 */
+/* (3) 하단 스크롤 안내 영역 등장 애니메이션 */
 .hero__fade-in {
+  /* pureFadeIn 애니메이션을 1.5초 동안 실행하되, 0.8초 딜레이(대기) 후 시작 */
   animation: pureFadeIn 1.5s ease-out 0.8s both;
 }
 
-/* 4. 마우스 아이콘 제자리 바운싱 */
+/* (4) 마우스 아이콘이 위아래로 계속 움직이게 만드는 애니메이션 */
 .hero__scroll-bounce {
+  /* pureMouseBounce 애니메이션을 1.8초 주기로 평생 무한 반복(infinite) */
   animation: pureMouseBounce 1.8s infinite ease-in-out;
 }
 
@@ -32,19 +36,21 @@
    애니메이션 키프레임 정의 (Keyframes)
    ========================================== */
 
+/* 아래에서 위로 서서히 올라오며 선명해지는 구체적인 과정 정의 */
 @keyframes pureFadeInUp {
   from {
-    opacity: 0;
-    filter: blur(10px);          /* 처음엔 흐릿하게 시작 */
-    transform: translateY(120px); /* 더 깊은 밑에서 출발 */
+    opacity: 0; /* 시작: 완전히 투명 */
+    filter: blur(10px); /* 시작: 흐릿하게 */
+    transform: translateY(120px); /* 시작: 120픽셀 아래에서 출발 */
   }
   to {
-    opacity: 1;
-    filter: blur(0);              /* 제자리에 오면서 완전히 선명해짐 */
-    transform: translateY(0);
+    opacity: 1; /* 끝: 완전히 선명 */
+    filter: blur(0); /* 끝: 흐림 효과 제거 */
+    transform: translateY(0); /* 끝: 제자리 배치 */
   }
 }
 
+/* 서서히 나타나는 구체적인 과정 정의 */
 @keyframes pureFadeIn {
   from {
     opacity: 0;
@@ -56,11 +62,12 @@
   }
 }
 
+/* 위아래로 마우스가 통통 튀는 구체적인 과정 정의 */
 @keyframes pureMouseBounce {
   0%, 100% {
-    transform: translateY(0);
+    transform: translateY(0); /* 처음과 끝: 제자리 */
   }
   50% {
-    transform: translateY(6px);
+    transform: translateY(6px); /* 중간(50% 시점): 아래로 6픽셀 이동 */
   }
 }
