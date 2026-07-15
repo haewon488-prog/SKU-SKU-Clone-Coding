@@ -1,3 +1,4 @@
+import { Link, useLocation } from "react-router-dom";
 import {
   BuildingIcon,
   GoogleIcon,
@@ -7,28 +8,39 @@ import {
 import { GENERATIONS } from "../data/teamData.jsx";
 
 export default function Header() {
+  const { pathname } = useLocation();
+
   return (
     <header className="lk-header">
       <div className="lk-header-inner">
-        <div className="lk-logo">
+        <Link to="/" className="lk-logo">
           <img
             src="/logo/likelionLogo.png"
             alt="LIKELION SKU"
             className="logo-img"
           />
           <span>LIKELION SKU</span>
-        </div>
+        </Link>
 
         <nav className="lk-nav">
-          <a href="/project" className="lk-nav-link">
+          <Link
+            to="/project"
+            className={`lk-nav-link ${pathname.startsWith("/project") ? "active" : ""}`}
+          >
             PROJECT
-          </a>
-          <a href="/team" className="lk-nav-link active">
+          </Link>
+          <Link
+            to="/team"
+            className={`lk-nav-link ${pathname.startsWith("/team") ? "active" : ""}`}
+          >
             TEAM
-          </a>
-          <a href="/community" className="lk-nav-link">
+          </Link>
+          <Link
+            to="/community"
+            className={`lk-nav-link ${pathname.startsWith("/community") ? "active" : ""}`}
+          >
             COMMUNITY
-          </a>
+          </Link>
         </nav>
 
         <div className="lk-actions">
@@ -52,28 +64,28 @@ export default function Header() {
           <div className="lk-dropdown-col">
             <h4>PROJECT</h4>
             {GENERATIONS.map((g) => (
-              <a href={`/project?tab=${g}`} key={"dp" + g}>
+              <Link to={`/project?tab=${g}`} key={"dp" + g}>
                 {g}
-              </a>
+              </Link>
             ))}
           </div>
 
           <div className="lk-dropdown-col">
             <h4>TEAM</h4>
             {GENERATIONS.map((g) => (
-              <a
-                href={`/team?tab=${g}`}
+              <Link
+                to={`/team?tab=${g}`}
                 key={"dt" + g}
                 className={g === "14기" ? "current" : ""}
               >
                 {g}
-              </a>
+              </Link>
             ))}
           </div>
 
           <div className="lk-dropdown-col">
             <h4>COMMUNITY</h4>
-            <a href="/community/recruit">모집공고</a>
+            <Link to="/community/recruit">모집공고</Link>
           </div>
         </div>
       </div>
